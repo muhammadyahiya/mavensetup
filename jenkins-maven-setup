@@ -1,0 +1,38 @@
+Jenkins Setup
+===========================================================
+To run jenkins using binary try below steps
+sudo amazon-linux-extras install java-openjdk11
+wget https://get.jenkins.io/war-stable/2.303.3/jenkins.war
+java -jar jenkins.war > /dev/null 2>&1 &
+
+Or to install jenkins as a service use these steps
+ssh to the instance and run sudo yum update -y command
+sudo amazon-linux-extras install java-openjdk11
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins -y
+
+if you get this error Error: Package: jenkins-2.303.2-1.1.noarch (jenkins)
+Requires: daemonize
+sudo amazon-linux-extras install epel -y
+sudo yum install daemonize
+sudo yum install jenkins -y
+
+
+=============================================================
+maven setup
+=============================================================
+sudo yum remove maven -y
+wget https://mirrors.estointernet.in/apache/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+sudo tar xf apache-maven-*.tar.gz -C /opt
+sudo ln -s /opt/apache-maven-3.8.4 /opt/maven
+
+==============================================================
+docker
+==============================================================
+sudo amazon-linux-extras install docker -y
+crete credentials as secret text type
+1. dockerpwd  :  Copy docker hub pwd
+2. dpeloymentserverpwd: any password
+
+sudo chmod 777 /var/run/docker.sock
